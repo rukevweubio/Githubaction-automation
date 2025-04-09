@@ -1,0 +1,15 @@
+name: MY FIRST LINUX ACTION 
+
+on: push 
+
+
+jobs:
+    the_second_job:
+        runs-on: ubuntu-lastest
+        steps:
+          - name: my new file creation
+            run: echo" this is automation"
+          - name: my second job automation
+            run: ls
+          - name: the third automation
+            run: find . -type f | wc -l
