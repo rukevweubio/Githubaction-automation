@@ -1,0 +1,22 @@
+name: Three Simple Jobs
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 1 - Print Hello World
+        run: echo "Hello from Job 1!"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 2 - List Files
+        run: ls -la
+
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 3 - Check System Info
+        run: uname -a && uptime
