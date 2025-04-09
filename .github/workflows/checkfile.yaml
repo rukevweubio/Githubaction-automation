@@ -1,15 +1,27 @@
-name: MY FIRST LINUX ACTION 
+name: MY FIRST LINUX ACTION
 
-on: push 
-
+on: push
 
 jobs:
-    the_second_job:
-        runs-on: ubuntu-lastest
-        steps:
-          - name: my new file creation
-            run: echo" this is automation"
-          - name: my second job automation
-            run: ls
-          - name: the third automation
-            run: find . -type f | wc -l
+  the_second_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create a New File
+        run: echo "this is automation" > newfile.txt
+
+      - name: List Files in Directory
+        run: ls
+
+      - name: Count Regular Files
+        run: find . -type f | wc -l
+
+      - name: Read and Display README.md (if exists)
+        run: |
+          if [ -f README.md ]; then
+            cat README.md | sort
+          else
+            echo "README.md does not exist in the repository."
+          fi
