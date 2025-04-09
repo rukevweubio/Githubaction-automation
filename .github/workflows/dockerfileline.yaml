@@ -1,0 +1,13 @@
+name: Use Custom Docker Image from Local Registry
+
+on: push
+
+jobs:
+  use-custom-image:
+    runs-on: ubuntu-latest
+    container:
+      image: localhost:5000/my-local-image:latest # Use the local registry URL
+
+    steps:
+      - name: Run Command Inside Custom Image
+        run: echo "This command runs inside the custom Docker image!"
