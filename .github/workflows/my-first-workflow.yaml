@@ -1,0 +1,19 @@
+name: My First Workflow
+
+on: push
+
+jobs:
+  first_job_action_flow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the rate
+        run: echo "This is my first script"
+
+      - name: The second step
+        run: echo "This is GitHub Actions"
+
+      - name: List the files
+        run: ls
+
+      - name: Check the total files
+        run: find . -type f | wc -l
