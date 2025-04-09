@@ -1,4 +1,4 @@
-name: Use Custom Docker Image from Local Registry
+name: Use Custom Docker Image from Local Registry in the housee 
 
 on: push
 
