@@ -1,0 +1,22 @@
+name: Create a Shell Script
+
+on: push
+
+jobs:
+  create-shell-script-file:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Create a Shell Script
+      - name: Create a Shell Script File
+        run: |
+         
+          echo 'echo "Hello, this is a shell script!"' >> shellscript.sh
+          chmod +x shellscript.sh
+
+      # Step 3: Execute the Shell Script
+      - name: Execute the Shell Script
+        run: ./shellscript.sh
