@@ -1,0 +1,30 @@
+name: python-code
+
+on: push
+
+jobs:
+  my-third-workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install htop
+        run: sudo apt-get update && sudo apt-get install -y htop
+
+      - name: Check if htop is running
+        run: ps aux | egrep -i "htop" || echo "htop not running"
+
+      - name: Create a directory in home
+        run: mkdir -p ~/gitaction
+
+      - name: Create files in the directory
+        run: touch ~/gitaction/filename{1..6}.txt
+
+      - name: Copy the files to a new directory and count them
+        run: |
+          mkdir -p ~/newfile
+          cp ~/gitaction/*.txt ~/newfile/
+          find ~/newfile -type f -name "*.txt" | wc -l
+          echo "This is the final automation"
