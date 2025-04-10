@@ -1,6 +1,8 @@
 name: Create a Shell Script
 
-on: push
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   create-shell-script-file:
