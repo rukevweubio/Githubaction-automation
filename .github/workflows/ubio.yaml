@@ -1,0 +1,37 @@
+name: docker container
+
+on: 
+  push
+
+env:
+  container_registry: docker.io
+  docker_username: rukevweubio
+  image_name: nginx
+  DOCKER_PASSWORD: Comfort12345@
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t ${{ env.container_registry }}/${{ env.docker_username }}/${{ env.image_name }}:latest .
+
+      - name: Docker Login
+        env:
+          docker_password: ${{ env.DOCKER_PASSWORD }}
+        run: echo "${{ env.docker_password }}" | docker login -u ${{ env.docker_username }} --password-stdin
+
+      - name: Push Docker Image
+        run: docker push ${{ env.container_registry }}/${{ env.docker_username }}/${{ env.image_name }}:latest
+
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Docker container
+        run: |
+          docker pull ${{ env.container_registry }}/${{ env.docker_username }}/${{ env.image_name }}:latest
+          docker run -d -p 8080:80 ${{ env.container_registry }}/${{ env.docker_username }}/${{ env.image_name }}:latest
