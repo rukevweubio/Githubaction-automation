@@ -1,0 +1,15 @@
+name: create a simple script
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  simple_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a simple script in Bash
+        run: |
+          sudo touch file.txt
+          echo "this is linux" > file.txt
+          cat file.txt | wc -l
+          echo "$(date)" >> file.txt
