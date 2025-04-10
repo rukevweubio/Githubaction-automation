@@ -1,0 +1,31 @@
+name: Pull Docker Image
+
+on:
+  # Trigger the workflow manually or on a schedule
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight (UTC)
+
+jobs:
+  pull-docker-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository (optional if no code changes are needed)
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub using username and password
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      # Step 3: Pull the Docker image
+      - name: Pull Docker image
+        run: |
+          docker pull rukevweubio/nginx:latest
+
+      # Step 4: Verify the pulled image (optional)
+      - name: Verify the pulled image
+        run: |
+          docker images | grep rukevweubio/nginx
